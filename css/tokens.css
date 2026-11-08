@@ -1,0 +1,26 @@
+/* Variables de diseño: colores, tipografía y curvas de animación. */
+
+:root {
+  --bg: #0b0f19;
+  --bg-raised: #121827;
+  --text: #f5f5f7;
+  --text-soft: rgba(235, 238, 245, .68);
+  --text-faint: rgba(235, 238, 245, .46);
+  --hairline: rgba(255, 255, 255, .1);
+
+  --red: #e5383b;
+  --pine: #5fae8b;
+  --gold: #e8c27a;
+  --snow: #f4f7fb;
+
+  --glass: rgba(255, 255, 255, .055);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter",
+          "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-soft: cubic-bezier(.4, 0, .2, 1);
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --section-gap: clamp(5.5rem, 14vw, 11rem);
+}

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es" data-lights="off">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para Viviana · Navidad</title>
+<meta name="description" content="Una pequeña Navidad hecha a mano para Viviana.">
+<meta name="theme-color" content="#0b0f19">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<!-- Debe ejecutarse antes de pintar: activa las animaciones que dependen de JS -->
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/background.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/countdown.css">
+<link rel="stylesheet" href="css/letter.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/animations.css">
+
+<!-- Scripts diferidos, en orden de dependencia -->
+<script src="js/namespace.js" defer></script>
+<script src="js/countdown-logic.js" defer></script>
+<script src="js/countdown.js" defer></script>
+<script src="js/lights.js" defer></script>
+<script src="js/snow.js" defer></script>
+<script src="js/reveal.js" defer></script>
+<script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <!-- Capas decorativas de fondo -->
+  <div class="sky" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true"></div>
+  <canvas id="snow" aria-hidden="true"></canvas>
+
+  <main>
+    <!-- ======================= HERO ======================= -->
+    <header class="hero">
+      <div class="hero__intro">
+        <p class="eyebrow">Para Viviana</p>
+        <p class="hero__subtitle">Una pequeña Navidad, hecha a mano</p>
+        <h1 class="hero__title">Qué bonito es coincidir contigo.</h1>
+
+        <div class="hero__action">
+          <button class="btn btn--primary" type="button" data-toggle="lights">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21.5h4M12 2.5a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V18h6v-.8c0-.8.4-1.5 1-2a7 7 0 0 0-4-12.7Z"/></svg>
+            <span data-label>Encender las luces</span>
+          </button>
+          <p class="hero__hint" data-hint aria-live="polite">Snoopy y sus amigos ya están listos. Solo faltan las luces.</p>
+        </div>
+      </div>
+
+      <div class="scene-wrap">
+        <!-- Colina nevada -->
+        <svg class="hill" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hill-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c9d6ea" stop-opacity=".5"/>
+              <stop offset=".55" stop-color="#5a6a88" stop-opacity=".22"/>
+              <stop offset="1" stop-color="#0b0f19" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#hill-fill)" d="M0 62C240 18 470 8 720 22s480 12 720 44v94H0Z"/>
+        </svg>
+
+        <!-- Pino y regalos a la izquierda (solo en pantallas amplias) -->
+        <svg class="side side--left" viewBox="10 200 270 285" aria-hidden="true">
+          <defs>
+            <linearGradient id="pine" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d6a55"/><stop offset="1" stop-color="#173c35"/></linearGradient>
+          </defs>
+          <rect x="84" y="442" width="16" height="36" rx="2" fill="#2a1d18"/>
+          <path fill="url(#pine)" d="M92 228 136 306h-22l36 66h-24l42 76H18l42-76H36l36-66H50Z"/>
+          <path fill="#eaf0f8" opacity=".92" d="M92 228l21 37c-7 6-12-1-18 3-6 4-12-3-20 1-5 2-7-1-5-4Zm-29 95c10 4 15-3 24 1 9 4 15-3 24 0 8 3 14 0 19 1l9 15c-8 5-14-1-22 2-10 3-14-2-24 1-9 3-16-3-24 0-5 2-11 1-14-1Z"/>
+          <path id="tree-left" class="wire" d="M72 288Q96 306 118 296M60 356Q96 386 134 366M46 424Q96 456 148 434"/>
+          <path fill="#e8c27a" d="m92 208 4.7 9.9 10.8 1.4-8 7.5 2.1 10.7L92 232.2l-9.6 5.3 2.1-10.7-8-7.5 10.8-1.4Z"/>
+          <!-- Regalos -->
+          <rect x="170" y="430" width="66" height="50" rx="4" fill="#c92f2d"/>
+          <rect x="196" y="430" width="14" height="50" fill="#e8c27a"/>
+          <rect x="165" y="420" width="76" height="14" rx="3" fill="#a92529"/>
+          <rect x="196" y="420" width="14" height="14" fill="#e8c27a"/>
+          <rect x="232" y="452" width="42" height="28" rx="3" fill="#2d6a55"/>
+          <rect x="248" y="452" width="10" height="28" fill="#f4f7fb"/>
+          <g id="left-bulbs"></g>
+        </svg>
+
+        <!-- Pino y regalo a la derecha (solo en pantallas amplias) -->
+        <svg class="side side--right" viewBox="500 270 215 215" aria-hidden="true">
+          <rect x="630" y="448" width="14" height="30" rx="2" fill="#2a1d18"/>
+          <path fill="url(#pine)" d="M637 292 672 356h-18l30 54h-20l34 54H572l34-54h-20l30-54h-18Z"/>
+          <path fill="#eaf0f8" opacity=".92" d="m637 292 17 31c-6 5-10-1-15 2-5 3-10-2-16 1-5 2-6 0-4-3Z"/>
+          <path id="tree-right" class="wire" d="M618 346Q638 362 658 352M604 400Q638 426 672 408"/>
+          <path fill="#e8c27a" d="m637 276 3.8 8 8.8 1.1-6.5 6.1 1.7 8.7-7.8-4.3-7.8 4.3 1.7-8.7-6.5-6.1 8.8-1.1Z"/>
+          <rect x="510" y="438" width="54" height="42" rx="4" fill="#e8c27a"/>
+          <rect x="531" y="438" width="12" height="42" fill="#c92f2d"/>
+          <rect x="506" y="429" width="62" height="12" rx="3" fill="#d6ad62"/>
+          <rect x="531" y="429" width="12" height="12" fill="#c92f2d"/>
+          <g id="right-bulbs"></g>
+        </svg>
+
+        <!-- Ilustración principal, con luna y luces por detrás -->
+        <div class="art">
+          <div class="art__moon"></div>
+          <div class="art__moon art__moon--warm warm"></div>
+
+          <svg class="art__garland" viewBox="0 0 1024 1024" aria-hidden="true">
+            <defs>
+              <radialGradient id="glow-0"><stop offset="0" stop-color="#ff5b52" stop-opacity=".75"/><stop offset="1" stop-color="#ff5b52" stop-opacity="0"/></radialGradient>
+              <radialGradient id="glow-1"><stop offset="0" stop-color="#ffd27a" stop-opacity=".75"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+              <radialGradient id="glow-2"><stop offset="0" stop-color="#5fd39a" stop-opacity=".7"/><stop offset="1" stop-color="#5fd39a" stop-opacity="0"/></radialGradient>
+              <radialGradient id="glow-3"><stop offset="0" stop-color="#fff1d6" stop-opacity=".75"/><stop offset="1" stop-color="#fff1d6" stop-opacity="0"/></radialGradient>
+            </defs>
+            <path id="hero-garland" class="wire" d="M-600 230Q-50 430 505 335Q1060 430 1620 230"/>
+            <g id="hero-bulbs"></g>
+          </svg>
+
+          <img class="art__image" src="images/img1.png" width="1024" height="1024" decoding="async"
+               alt="Snoopy y sus amigos decoran juntos un árbol de Navidad.">
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= CUENTA REGRESIVA ================= -->
+    <section class="section reveal" id="countdown-section" aria-labelledby="countdown-title">
+      <p class="eyebrow">Cuenta regresiva</p>
+      <h2 class="section__title" id="countdown-title">Cada vez falta menos.</h2>
+      <p class="section__lead" id="countdown-date"></p>
+
+      <div class="countdown glass" role="timer" aria-label="Tiempo restante para Navidad">
+        <div class="unit"><span class="unit__value" id="cd-days">–</span><span class="unit__label" id="cd-days-label">Días</span></div>
+        <div class="unit"><span class="unit__value" id="cd-hours">–</span><span class="unit__label" id="cd-hours-label">Horas</span></div>
+        <div class="unit"><span class="unit__value" id="cd-minutes">–</span><span class="unit__label" id="cd-minutes-label">Minutos</span></div>
+        <div class="unit"><span class="unit__value" id="cd-seconds">–</span><span class="unit__label" id="cd-seconds-label">Segundos</span></div>
+      </div>
+    </section>
+
+    <!-- ===================== CARTA ===================== -->
+    <section class="section letter-section reveal" aria-labelledby="letter-title">
+      <p class="eyebrow">Una nota para ti</p>
+      <h2 class="section__title" id="letter-title">Lo que quería decirte.</h2>
+
+      <article class="letter glass">
+        <svg class="garland" viewBox="0 0 600 62" aria-hidden="true">
+          <path id="letter-garland" class="wire" d="M0 8Q75 62 150 12Q225 62 300 12Q375 62 450 12Q525 62 600 8"/>
+          <g id="letter-bulbs"></g>
+        </svg>
+
+        <p class="letter__greeting">Viviana:</p>
+
+        <div class="letter__body">
+          <p>Sé que los últimos tiempos no han sido sencillos y que estás enfrentando cosas del pasado que quizás llevaban mucho tiempo ahí guardadas. No conozco cada detalle ni lo pesado que pueda sentirse en tu día a día, pero lo que sí tengo claro —porque lo veo— es que lo estás haciendo. Estás dando la cara, estás afrontándolo y estás intentándolo con una valentía que pocos tienen. Eso requiere una fuerza enorme.</p>
+          <p>Quería escribirte esto para recordarte lo importante que eres en mi vida. A veces, en medio de las batallas internas, uno pierde de vista el impacto que tiene en los demás. Para mí, tú eres un referente absoluto. Admiro profundamente tu integridad, la forma en que ves el mundo y el tipo de persona que eres; de verdad, eres de esas pocas personas que te hacen querer ser mejor cada día solo con el ejemplo que das.</p>
+          <p>En estas fechas y siempre, celebro la persona que eres y lo valioso que es para mí coincidir contigo. Gracias por tu amistad y por ser exactamente como eres.</p>
+        </div>
+
+        <!-- Puedes añadir tu nombre debajo de esta línea -->
+        <p class="letter__sign">Con todo mi cariño.</p>
+
+        <div class="postscript">
+          <p>P.D. Snoopy dice que ya te puedes quedar a ver la nieve.</p>
+        </div>
+
+        <div class="controls">
+          <button class="btn btn--primary" type="button" data-toggle="lights">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21.5h4M12 2.5a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V18h6v-.8c0-.8.4-1.5 1-2a7 7 0 0 0-4-12.7Z"/></svg>
+            <span data-label>Encender las luces</span>
+          </button>
+          <button class="btn btn--ghost" type="button" data-toggle="snow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M12 6 9.5 3.5M12 6l2.5-2.5M12 18l-2.5 2.5M12 18l2.5 2.5"/></svg>
+            <span data-label>Detener la nieve</span>
+          </button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">Hecha con cariño para Viviana · <span id="footer-year"></span></footer>
+
+</body>
+</html>

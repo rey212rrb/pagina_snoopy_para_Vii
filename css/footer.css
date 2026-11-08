@@ -1,0 +1,8 @@
+/* Pie de página. */
+
+.footer {
+  padding: clamp(4rem, 10vw, 7rem) var(--gutter) calc(2.5rem + env(safe-area-inset-bottom));
+  color: var(--text-faint);
+  font-size: .875rem;
+  text-align: center;
+}
